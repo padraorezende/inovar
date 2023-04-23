@@ -1,13 +1,13 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { FullPage } from '../components/FullPage';
-import { AccessManagePage } from '../pages/AccessManagePage';
+import { AccessManagePageContaier } from '../pages/AccessManage/AccessManageContainer';
 import { CopyDocumentPage } from '../pages/CopyDocumentPage';
-import { DashboardPage } from '../pages/DashboardPage';
+import { DashboardContainer } from '../pages/Dashboard/DashboardContainer';
 import { LoginContainer } from '../pages/Login/LoginContainer';
-import { NewUserPage } from '../pages/NewUserPage';
-import { SearchStatusPage } from '../pages/SearchStatusPage';
+import { NewUserContainer } from '../pages/NewUser/NewUserContainer';
+import { SearchStatusContainer } from '../pages/SearchStatus/SearchStatusContainer';
 import { TransferencesPage } from '../pages/TransferencesPage';
-import { UploadDataPage } from '../pages/UploadDataPage';
+import { UploadDataContainer } from '../pages/UploadData/UploadDataContainer';
 import { WriteOffPage } from '../pages/WriteOffPage';
 
 
@@ -16,15 +16,15 @@ export const AppRoutes = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LoginContainer />} />
-        <Route path="/dashboard" element={<FullPage paddingY={"2rem"}><DashboardPage /></FullPage>} />
+        <Route path="/dashboard" element={<FullPage><DashboardContainer /></FullPage>} />
         <Route path="/copy-document" element={<FullPage><CopyDocumentPage /></FullPage>} />
         <Route path="/transference" element={<FullPage><TransferencesPage /></FullPage>} />
         <Route path="/write-off" element={<FullPage><WriteOffPage /></FullPage>} />
-        <Route path="/manager-access" element={<FullPage><AccessManagePage /></FullPage>} />
-        <Route path="/new-user" element={<FullPage><NewUserPage /></FullPage>} />
-        <Route path="/search-status" element={<FullPage><SearchStatusPage /></FullPage>} />
-        <Route path="/upload-data" element={<FullPage><UploadDataPage /></FullPage>} />
+        <Route path="/search-status" element={<FullPage><SearchStatusContainer /></FullPage>} />
+        <Route path="/upload-data" element={<FullPage><UploadDataContainer /></FullPage>} />
+        <Route path="/manager-access" element={<FullPage><AccessManagePageContaier /></FullPage>} />
+        <Route path="/new-user" element={<FullPage><NewUserContainer /></FullPage>} />
       </Routes>
     </Router >
   )
-};
+}; 

@@ -4,14 +4,15 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export const Dropzone = () => {
-    const [files, setFiles] = useState<File[]>([]);
+export type DropzoneProps = {
+    files: File[]
+    selectedFiles:  (files: File[] ) => void
+    onDrop: (acceptedFiles: File[])  => void
+}
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        setFiles((currentFiles) => [...currentFiles, ...acceptedFiles]);
-    }, []);
+export const Dropzone = (props: DropzoneProps) => {
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: props.onDrop });
 
     return (
         <div className="flex items-center justify-center">
@@ -32,7 +33,7 @@ export const Dropzone = () => {
                     </div> 
                 )}
             </div>
-            {files.length > 0 && (
+            {props.files.length > 0 && (
                 <div className="w-1/4">
                     <h1></h1>
                     <div className="flex">
@@ -45,13 +46,13 @@ export const Dropzone = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {files.map((file) => (
+                                {props.files.map((file) => (
                                     <TableRow key={file.name}>
                                         <TableCell><FontAwesomeIcon icon={faFileExcel} color="#7CFC00" size="2x" /></TableCell>
                                         <TableCell>{file.name}</TableCell>
                                         <TableCell align="center">
                                             <FontAwesomeIcon icon={faRemove} color="red" cursor={"pointer"}
-                                                onClick={() => setFiles(files.filter(x => x != file))}
+                                                onClick={() => props.selectedFiles(props.files.filter(x => x != file))}
                                             />
                                         </TableCell>
                                     </TableRow>

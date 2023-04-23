@@ -1,5 +1,6 @@
 
-export type DadosLogin = {
+export type DataLogin = {
     username: string
     password: string
 }
+

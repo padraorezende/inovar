@@ -1,20 +1,22 @@
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logoImg from "../../assets/logo.png";
-import { DadosLogin } from "../../types/Login";
+import { DataLogin } from "../../types/Login";
 import { useFormik } from "formik";
+import { TextField } from "@mui/material";
 
 
 export type LoginProps = {
-    dadosLogin: DadosLogin
-    onLogin: (dadosLogin: DadosLogin) => void
+    dataLogin: Partial<DataLogin>
+    onLogin: (dataLogin: Partial<DataLogin>) => void
+    showPassword: boolean
+    onShowPassword: (show: boolean) => void
 }
 
 export const LoginPage = (props: LoginProps) => {
 
-
     const formik = useFormik({
-        initialValues: { ...props.dadosLogin },
+        initialValues: { ...props.dataLogin },
         onSubmit: (values, { }) => { },
         enableReinitialize: true,
     });
@@ -25,16 +27,16 @@ export const LoginPage = (props: LoginProps) => {
                 <img src={logoImg} alt="logo" className="w-[500px]" />
             </div>
 
-            <div className="bg-[#F9F9F9] flex items-center justify-center md:w-1/2">
+            <div className="bg-[#ebebeb] flex items-center justify-center md:w-1/2">
                 <div className="w-full max-w-md flex flex-col items-center">
                     <FontAwesomeIcon
                         icon={faUserCircle}
-                        color="#F8BB7A"
+                        color="#f5a957"
                         size="5x"
                         className="mb-10"
                     />
                     <div className="w-4/5 flex flex-col items-start">
-                        <label className="text-[#E95401]">Username:</label>
+                        <label className="text-[#E95401] text-sm mb-1">Username</label>
                         <input className="mb-4 w-full border border-[#D2D1D1] rounded-md py-2 px-3"
                             name="username"
                             value={formik.values.username}
@@ -42,15 +44,22 @@ export const LoginPage = (props: LoginProps) => {
                         />
                     </div>
                     <div className="w-4/5 flex flex-col items-start">
-                        <label className="text-[#E95401]">Password:</label>
-                        <input className="mb-4 w-full border border-[#D2D1D1] rounded-md py-2 px-3"
-                            name="password"
-                            type="password"
-                            value={formik.values.username}
-                            onChange={formik.handleChange}
-                        />
+                        <label className="text-[#E95401] text-sm mb-1">Password</label>
+                        <div className="flex flex-row justify-center items-center w-full">
+                            <input className="mb-4 border w-full border-[#D2D1D1] rounded-md py-2 px-3"
+                                name="password"
+                                type={props.showPassword ? "text" : "password"}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                            />
+                            <FontAwesomeIcon
+                                icon={props.showPassword ? faEye : faEyeSlash} className="mb-4 mx-2"
+                                cursor={"pointer"} onClick={() => props.onShowPassword(!props.showPassword)}
+                            />
+                        </div>
+
                     </div>
-                    <button className="w-4/5 bg-[#F8BB7A] text-white my-6 py-2 px-3 rounded-md"
+                    <button className="w-4/5 bg-[#f5a957] text-white my-6 py-2 px-3 rounded-md"
                         onClick={() => props.onLogin(formik.values)}
                     >
                         Login now
