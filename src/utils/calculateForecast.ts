@@ -1,5 +1,3 @@
-import { Registers } from "../types/Registers";
-
 interface StatusDaysMap {
     [status: string]: {
         [statusValue: string]: string;
@@ -7,241 +5,240 @@ interface StatusDaysMap {
 }
 
 const statusDaysMap: StatusDaysMap = {
-    '2ª via do CRV': {
-        'Em produção': "5 dias úteis",
-        'Homologando vistoria': "4 dias úteis",
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "2ª VIA DO CRV": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Transferência UF': {
-        'Em produção': "5 dias úteis",
-        'Homologando vistoria': "4 dias úteis",
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "TRANSFERÊNCIA UF": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Alteração de Dados': {
-        'Em produção': "4 dias úteis",
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "ALTERAÇÃO DE DADOS": {
+        "EM PRODUÇÃO": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Blindado': {
-        'Em produção': "3 dias úteis",
-        'No DETRAN-MG': "2 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "BLINDADO": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Vistoria Móvel': {
-        'Em produção': "4 dias úteis",
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "VISTORIA MÓVEL": {
+        "EM PRODUÇÃO": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Vistoria Lacrada': {
-        'Em produção': "Vide Observações",
-        'No DETRAN-MG': "Vide Observações",
-        'Pendência': 'Vide Observações',
-        'Concluído': 'Vide Observações'
+    "VISTORIA LACRADA": {
+        "EM PRODUÇÃO": "Vide Observações",
+        "NO DETRAN-MG": "Vide Observações",
+        "PENDÊNCIA": "Vide Observações",
+        "CONCLUÍDO": "Vide Observações"
     },
-    'Baixa de veículo': {
-        'Em produção': "10 dias úteis",
-        'Homologando vistoria': '9 dias úteis',
-        'No DETRAN-MG': "5 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "BAIXA DE VEÍCULO": {
+        "EM PRODUÇÃO": "10 dias úteis",
+        "HOMOLOGANDO VISTORIA": "9 dias úteis",
+        "NO DETRAN-MG": "5 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    '2ª via com troca de motor': {
-        'Em produção': "5 dias úteis",
-        'Homologando vistoria': '4 dias úteis',
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "2ª VIA COM TROCA DE MOTOR": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Transferência BH': {
-        'Em produção': '5 dias úteis',
-        'Homologando vistoria': '4 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "TRANSFERÊNCIA BH": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Alteração de Dados MOTOR': {
-        'Em produção': '4 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "ALTERAÇÃO DE DADOS MOTOR": {
+        "EM PRODUÇÃO": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Regravação de chassi': {
-        'Em produção': '36 dias úteis',
-        'Laudo de Verificação de Componentes': '24 dias úteis',
-        'Autorização de Remarcação': '19 dias úteis',
-        'Remarcação': '12 dias úteis',
-        'Vistoria': '9 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Troca de Vidros': '',
-        'Pendência': '',
-        'Concluído': ''
+    "REGRAVAÇÃO DE CHASSI": {
+        "EM PRODUÇÃO": "36 dias úteis",
+        "LAUDO DE VERIFICAÇÃO DE COMPONENTES": "24 dias úteis",
+        "AUTORIZAÇÃO DE REMARCAÇÃO": "19 dias úteis",
+        "REMARCAÇÃO": "12 dias úteis",
+        "VISTORIA": "9 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "TROCA DE VIDROS": "",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": ""
     },
-    'Regravação de motor': {
-        'Em produção': '36 dias úteis',
-        'Laudo de Verificação de Componentes': '24 dias úteis',
-        'Autorização de Remarcação': '19 dias úteis',
-        'Remarcação': '12 dias úteis',
-        'Vistoria': '9 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Troca de Vidros': '',
-        'Pendência': '',
-        'Concluído': ''
+    "REGRAVAÇÃO DE MOTOR": {
+        "EM PRODUÇÃO": "36 dias úteis",
+        "LAUDO DE VERIFICAÇÃO DE COMPONENTES": "24 dias úteis",
+        "AUTORIZAÇÃO DE REMARCAÇÃO": "19 dias úteis",
+        "REMARCAÇÃO": "12 dias úteis",
+        "VISTORIA": "9 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "TROCA DE VIDROS": "",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": ""
     },
-    '2ª via com média monta': {
-        'Em produção': '17 dias úteis',
-        'No DETRAN-MG': '15 dias úteis',
-        'Pendência': '',
-        'Concluído': ''
+    "2ª VIA COM MÉDIA MONTA": {
+        "EM PRODUÇÃO": "17 dias úteis",
+        "NO DETRAN-MG": "15 dias úteis",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": ""
     },
-    'Expedição de Certidão': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "EXPEDIÇÃO DE CERTIDÃO": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    '2ª via de Baixa': {
-        'Em produção': '4 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "2ª VIA DE BAIXA": {
+        "EM PRODUÇÃO": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Reclassificação de MONTA': {
-        'Em produção': '17 dias úteis',
-        'No DETRAN-MG': '15 dias úteis',
-        'Pendência': '',
-        'Concluído': ''
+    "RECLASSIFICAÇÃO DE MONTA": {
+        "EM PRODUÇÃO": "17 dias úteis",
+        "NO DETRAN-MG": "15 dias úteis",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": ""
     },
-    'Regularização de MONTA': {
-        'Em produção': '17 dias úteis',
-        'No DETRAN-MG': '15 dias úteis',
-        'Pendência': '',
-        'Concluído': ''
+    "REGULARIZAÇÃO DE MONTA": {
+        "EM PRODUÇÃO": "17 dias úteis",
+        "NO DETRAN-MG": "15 dias úteis",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": ""
     },
-    'Laudo com vistoria móvel': {
-        'Em produção': '4 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "LAUDO COM VISTORIA MÓVEL": {
+        "EM PRODUÇÃO": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Alteração para placa MERCOSUL': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "ALTERAÇÃO PARA PLACA MERCOSUL": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Solicitação de print': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "SOLICITAÇÃO DE PRINT": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Senha GNV': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "SENHA GNV": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Requerimento de geração de ATPV-e': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "REQUERIMENTO DE GERAÇÃO DE ATPV-E": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Alteração de GRAVAME FINANCEIRO': {
-        'Em produção': '5 dias úteis',
-        'Homologando vistoria': '4 dias úteis',
-        'No DETRAN-MG': '3 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "ALTERAÇÃO DE GRAVAME FINANCEIRO": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Solicitação de Print juridico': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "SOLICITAÇÃO DE PRINT JURIDICO": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Autorização para confecção de placa': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "AUTORIZAÇÃO PARA CONFECÇÃO DE PLACA": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    '2ª via + laudo de remarcação': {
-        'Em produção': '3 dias úteis',
-        'No DETRAN-MG': '2 dias úteis',
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK',
+    "2ª VIA + LAUDO DE REMARCAÇÃO": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Desbloqueio pendência de estampagem': {
-        'Em produção': "2 dias úteis",
-        'No DETRAN-MG': "2 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "DESBLOQUEIO PENDÊNCIA DE ESTAMPAGEM": {
+        "EM PRODUÇÃO": "2 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    '2ª via de placas': {
-        'Em produção': "2 dias úteis",
-        'No DETRAN-MG': "2 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "2ª VIA DE PLACAS": {
+        "EM PRODUÇÃO": "2 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Atualização para emissão de CRLV via net': {
-        'Em produção': "2 dias úteis",
-        'No DETRAN-MG': "2 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "ATUALIZAÇÃO PARA EMISSÃO DE CRLV VIA NET": {
+        "EM PRODUÇÃO": "2 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Solicitação de B. O.  -  RED´s': {
-        'Em produção': "3 dias úteis",
-        'No DETRAN-MG': "2 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "SOLICITAÇÃO DE B. O.  -  RED´S": {
+        "EM PRODUÇÃO": "3 dias úteis",
+        "NO DETRAN-MG": "2 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Laudo de classificação de danos': {
-        'Em produção': "5 dias úteis",
-        'No DETRAN-MG': "4 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "LAUDO DE CLASSIFICAÇÃO DE DANOS": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "NO DETRAN-MG": "4 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Microfilmagem': {
-        'Em produção': "5 dias úteis",
-        'No DETRAN-MG': "4 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "MICROFILMAGEM": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "NO DETRAN-MG": "4 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Solicitação LAUDO METALOGRAFICO': {
-        'Em produção': "30 dias úteis",
-        'Coleta de dados': "15 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "SOLICITAÇÃO LAUDO METALOGRAFICO": {
+        "EM PRODUÇÃO": "30 dias úteis",
+        "COLETA DE DADOS": "15 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     },
-    'Regularização chassi c/laudo de danos': {
-        'Em produção': "41 dias úteis",
-        'Laudo de Verificação de Componentes': "36 dias úteis",
-        'Laudo de Classificação de danos': "24 dias úteis",
-        'Autorização de Remarcação': "19 dias úteis",
-        'Remarcação': "12 dias úteis",
-        'Vistoria': "9 dias úteis",
-        'No DETRAN-MG': "3 dias úteis",
-        'Troca de Vidros': '',
-        'Pendência': '',
-        'Concluído': 'OK'
+    "REGULARIZAÇÃO CHASSI C/LAUDO DE DANOS": {
+        "EM PRODUÇÃO": "41 dias úteis",
+        "LAUDO DE VERIFICAÇÃO DE COMPONENTES": "36 dias úteis",
+        "LAUDO DE CLASSIFICAÇÃO DE DANOS": "24 dias úteis",
+        "AUTORIZAÇÃO DE REMARCAÇÃO": "19 dias úteis",
+        "REMARCAÇÃO": "12 dias úteis",
+        "VISTORIA": "9 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "TROCA DE VIDROS": "",
+        "PENDÊNCIA": "",
+        "CONCLUÍDO": "OK"
     },
-    'Alt/dados inclusão financeira': {
-        'Em produção': "5 dias úteis",
-        'Homologando vistoria': '4 dias úteis',
-        'No DETRAN-MG': "3 dias úteis",
-        'Pendência': 'Resolver pendência',
-        'Concluído': 'OK'
+    "ALT/DADOS INCLUSÃO FINANCEIRA": {
+        "EM PRODUÇÃO": "5 dias úteis",
+        "HOMOLOGANDO VISTORIA": "4 dias úteis",
+        "NO DETRAN-MG": "3 dias úteis",
+        "PENDÊNCIA": "Resolver pendência",
+        "CONCLUÍDO": "OK"
     }
-
-};
+}
 
 export const calculateForecast = (status: string[], request: string) => {
     const statusValue = status[status.length - 1];

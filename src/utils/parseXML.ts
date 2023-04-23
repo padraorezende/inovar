@@ -1,5 +1,6 @@
 import { Registers } from "../types/Registers";
 import * as xlsx from 'xlsx';
+import { convertDateCelltToBRDateString } from "./date";
 
 const readFile = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -32,14 +33,14 @@ const parseSheet = (sheet: xlsx.WorkSheet): Registers[] => {
         const responsible = item["RESPONSÁVEL"] ?? "";
         const obesityservation = item["OBSERVAÇÃO"] ?? "";
         return {
-            plate,
-            request,
-            date,
-            status,
-            secondData,
-            forecast,
-            responsible,
-            obesityservation,
+            plate: plate.trim().toUpperCase(),
+            request: request.trim().toUpperCase(),
+            date: date === "" ?  "" : convertDateCelltToBRDateString(date),
+            status: status.trim().toUpperCase(),
+            secondData: secondData === "" ?  "" : convertDateCelltToBRDateString(secondData),
+            forecast: forecast.trim().toUpperCase(),
+            responsible: responsible.trim().toUpperCase(),
+            obesityservation: obesityservation.trim().toUpperCase(),
         };
     });
 };

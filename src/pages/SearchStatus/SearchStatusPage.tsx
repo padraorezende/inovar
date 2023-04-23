@@ -1,27 +1,29 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { MainCard } from "../../components/MainCard"
-import { faInfo, faInfoCircle, faListCheck, faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons"
-import { DataTable } from "../../components/DataTable";
-import { ColumnsTable, FiltersTable, Table } from "../../types/Table";
-import { Registers } from "../../types/Registers";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { faListCheck, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Dialog, DialogContent, DialogTitle, List, ListItem, ListItemText } from "@mui/material";
 import { useState } from "react";
+import { DataTable } from "../../components/DataTable";
+import { MainCard } from "../../components/MainCard";
+import { Registers } from "../../types/Registers";
+import { ColumnsTable, FiltersTable } from "../../types/Table";
 
 
 export type SearchStatusProps = {
     filters: FiltersTable
     columns: ColumnsTable[]
-    data: Partial<Table<Registers>>
-    onPageChange: (_: any, _newPage: number) => void;
-    handleChangeActiveFilter: () => void
+    data: Registers[]
+    onPageChange: (_newPage: number) => void;
     handleChangeFilterName: (name: string) => void
     isModalOpen: boolean
     handleOpenModal: () => void;
+    selectedColumn: string
+    handleChangeSelectedColumn: (column: string) => void
+    hasNextPage: boolean
 }
 
 export const SearchStatusPage = (props: SearchStatusProps) => {
     const [status, setStatus] = useState<string[]>()
-  
+
 
     return (
         <>
@@ -31,19 +33,18 @@ export const SearchStatusPage = (props: SearchStatusProps) => {
             >
                 <DataTable
                     columns={props.columns}
-                    data={props.data.rows}
-                    handleChangeActiveFilter={props.handleChangeActiveFilter}
-                    count={props.data.count}
+                    data={props.data}
                     page={props.filters.page}
                     onPageChange={props.onPageChange}
                     handleChangeFilterName={props.handleChangeFilterName}
                     onShowArrayContent={(status) => {
                         setStatus(status)
                         props.handleOpenModal()
-                    }
-                    }
-                    
-
+                    }}
+                    showSelect
+                    selectedColumn={props.selectedColumn}
+                    handleChangeSelectedColumn={props.handleChangeSelectedColumn}
+                      hasNextPage={props.hasNextPage}
                 />
 
                 <Dialog fullWidth maxWidth="xs" open={props.isModalOpen} onClose={props.handleOpenModal}>

@@ -20,7 +20,6 @@ export const NewUserPage = (props: NewUserPageProps) => {
     const formik = useFormik({
         initialValues: {
             ...props.dataNewUser,
-            active: props.dataNewUser?.active ?? false,
             admin: props.dataNewUser.admin ?? false
         },
         onSubmit: (values, { }) => { },

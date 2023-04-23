@@ -1,21 +1,21 @@
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { DataTable } from "../../components/DataTable"
-import { MainCard } from "../../components/MainCard"
-import { ColumnsTable, FiltersTable, Table } from "../../types/Table"
-import { DataNewUser } from "../../types/NewUser"
 import { Dialog, DialogContent, DialogTitle, List, ListItem, ListItemText } from "@mui/material"
 import { useState } from "react"
+import { DataTable } from "../../components/DataTable"
+import { MainCard } from "../../components/MainCard"
+import { DataNewUser } from "../../types/NewUser"
+import { ColumnsTable, FiltersTable } from "../../types/Table"
 
 export type AccessManagePageProps = {
     filters: FiltersTable
     columns: ColumnsTable[];
-    data: Partial<Table<DataNewUser>>
-    onPageChange: (_: any, _newPage: number) => void;
-    handleChangeActiveFilter: () => void
+    data: DataNewUser[]
+    onPageChange: (_newPage: number) => void;
     handleChangeFilterName: (name: string) => void
     isModalOpen: boolean
     handleOpenModal: () => void;
+    hasNextPage: boolean
 }
 
 export const AccessManagePage = (props: AccessManagePageProps) => {
@@ -29,19 +29,17 @@ export const AccessManagePage = (props: AccessManagePageProps) => {
         >
             <DataTable
                 columns={props.columns}
-                data={props.data.rows}
-                handleChangeActiveFilter={props.handleChangeActiveFilter}
-                count={props.data.count}
+                data={props.data}
                 page={props.filters.page}
                 onPageChange={props.onPageChange}
                 handleChangeFilterName={props.handleChangeFilterName}
                 onShowArrayContent={(permissions) => {
                     props.handleOpenModal()
                     setPemissions(permissions)
-                }
-                }
+                }}
                 showPassword={showPassword}
                 onShowPassword={() => onShowPassword(!showPassword)}
+                hasNextPage={props.hasNextPage}
             />
 
             <Dialog fullWidth maxWidth="xs" open={props.isModalOpen} onClose={props.handleOpenModal}>

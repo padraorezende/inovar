@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-import { MainCard } from "../../components/MainCard"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Dropzone } from "../../components/Dropzone"
+import { MainCard } from "../../components/MainCard"
 
 export type UploadDataPageProps = {
     files: File[]

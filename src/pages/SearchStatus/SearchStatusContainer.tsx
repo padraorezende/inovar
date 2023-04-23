@@ -1,15 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
-import { SearchStatusPage } from "./SearchStatusPage"
-import { FiltersTable, Table } from "../../types/Table";
-import { Registers } from "../../types/Registers";
-import { collection, doc, getDocs, limit, orderBy, query, runTransaction, startAfter, startAt, where } from "firebase/firestore";
-import { db } from "../../service/firebase";
+import { DocumentData, QueryDocumentSnapshot, collection, endBefore, getDocs, limit, limitToLast, orderBy, query, startAfter, startAt, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { db } from "../../service/firebase";
+import { Registers } from "../../types/Registers";
+import { FiltersTable } from "../../types/Table";
+import { SearchStatusPage } from "./SearchStatusPage";
 
 export const SearchStatusContainer = () => {
-    const [filters, setFilters] = useState<FiltersTable>({ name: '', page: 0, isActive: true });
-    const [registersTable, setRegistersTable] = useState<Partial<Table<Registers>>>({ count: 0, rows: [] })
+    const [filters, setFilters] = useState<FiltersTable>({ name: '', page: 0 });
+    const [registersTable, setRegistersTable] = useState<Registers[]>([])
     const [openModal, setOpenModal] = useState<boolean>(false)
+    const [selectedColumn, SetSelectedColumn] = useState<string>("")
+    const [hasNextPage, setHasNextPage] = useState<boolean>(false)
+    const [docPrev, setDocPrev] = useState<Partial<QueryDocumentSnapshot<DocumentData>>>({});
+    const [docNext, setDocNext] = useState<Partial<QueryDocumentSnapshot<DocumentData>>>({});
 
     const columns = [
         { Header: "Id", accessor: "id" },
@@ -22,63 +26,75 @@ export const SearchStatusContainer = () => {
         { Header: "Observação", accessor: "obesityservation" },
     ];
 
-    const handleChangePage = useCallback((_: any, newPage: number) => {
-        setFilters((prev) => ({ ...prev, page: newPage }));
-    }, []);
-
-    const handleChangeToActiveFilter = () => {
-        setFilters((prev) => ({ ...prev, isActive: !prev.isActive }));
-    };
-
-    const onGetRegistersByName = async (name: string) => {
+    const onGetRegisters = async (page = 0, filtersName = '') => {
         try {
             const pageSize = 10;
-            const querySnapshot = await getDocs(
-                query(
-                    collection(db, 'registers'),
-                    where('plate', '==', name),
-                    limit(pageSize)
-                )
-            );
+            let querySnapshot;
+            const name = filtersName == '' ? null : filtersName.trim();
 
-            const registers = querySnapshot.docs.map((doc) => ({
+            if (page === 0) {
+                querySnapshot = await getDocs(
+                    query(collection(db, 'registers'),
+                        name ? where(selectedColumn, selectedColumn == "status" ? "array-contains" : '==', name) : orderBy('plate'),
+                        limit(pageSize))
+                );
+
+            } else if (page < filters.page) {
+                querySnapshot = await getDocs(
+                    query(collection(db, 'registers'),
+                        name ? where(selectedColumn, selectedColumn == "status" ? "array-contains" : '==', name) : orderBy('plate'),
+                        endBefore(docPrev),
+                        limitToLast(pageSize))
+                );
+            } else {
+                querySnapshot = await getDocs(
+                    query(collection(db, 'registers'),
+                        name ? where(selectedColumn, selectedColumn == "status" ? "array-contains" : '==', name) : orderBy('plate'),
+                        startAfter(docNext),
+                        limit(pageSize))
+                );
+            }
+
+            if (querySnapshot.size === 0) {
+                toast.error('Não há mais documentos para exibir.');
+                return;
+            }
+
+            const registers = querySnapshot.docs.map((doc, index) => ({
+                id: index + 1,
                 ...doc.data(),
             }) as Registers);
-            const count = querySnapshot.size;
 
-            setRegistersTable({ rows: registers, count });
+            setRegistersTable(registers);
+            setDocNext(querySnapshot.docs[querySnapshot.docs.length - 1]);
+            setDocPrev(querySnapshot.docs[0]);
+            setHasNextPage(registers.length == 10)
+
         } catch (error) {
             console.log(error)
             toast.error('Ocorreu algum erro, por favor tente novamente.');
         }
     };
 
-
-    const onGetRegisters = async (page = 0) => {
+    const handlePageChange = async (page: number) => {
         try {
-            const pageSize = 10;
-            
-            const querySnapshot = await getDocs(
-                query(
-                    collection(db, 'registers'),
-                    orderBy('plate'),
-                    startAt(page * pageSize),
-                    limit(pageSize),
-                )
-            );
-
-            const users = querySnapshot.docs.map((doc, index) => ({
-                id: index + 1,
-                ...doc.data(),
-            }) as Registers);
-           
-            const count = querySnapshot.size;
-
-            setRegistersTable({ rows: users, count });
+            await onGetRegisters(page, filters.name);
+            setFilters({ ...filters, page: page });
         } catch (error) {
+            console.error(error);
             toast.error('Ocorreu algum erro, por favor tente novamente.');
         }
-    };
+    }
+
+    const handleChangeFilterName = async (name: string) => {
+        try {
+            setFilters({ ...filters, page: 0, name: name });
+            await onGetRegisters(0, name);
+        } catch (error) {
+            console.error(error);
+            toast.error('Ocorreu algum erro, por favor tente novamente.');
+        }
+    }
 
     useEffect(() => {
         onGetRegisters()
@@ -90,11 +106,13 @@ export const SearchStatusContainer = () => {
             filters={filters}
             columns={columns}
             data={registersTable}
-            onPageChange={handleChangePage}
-            handleChangeActiveFilter={handleChangeToActiveFilter}
-            handleChangeFilterName={onGetRegistersByName}
+            onPageChange={handlePageChange}
+            handleChangeFilterName={handleChangeFilterName}
             handleOpenModal={() => setOpenModal(!openModal)}
             isModalOpen={openModal}
+            selectedColumn={selectedColumn}
+            handleChangeSelectedColumn={SetSelectedColumn}
+            hasNextPage={hasNextPage}
         />
     )
 }

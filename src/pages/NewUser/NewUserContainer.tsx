@@ -24,11 +24,6 @@ export const NewUserContainer = () => {
 
     const onAddUser = async (dataNewUser: Partial<DataNewUser>) => {
         try {
-            // if (dataNewUser.permissions) {
-            //     dataNewUser.permissions.sort((a, b) =>
-            //         permissions.indexOf(a) - permissions.indexOf(b))
-            // }
-
             if (dataNewUser.email && dataNewUser.password) {
                 const auth = getAuth();
                 await createUserWithEmailAndPassword(auth, dataNewUser.email, dataNewUser.password);

@@ -7,10 +7,4 @@ export type ColumnsTable = {
 export type FiltersTable = {
     name: string,
     page: number,
-    isActive: boolean
-}
-
-export type Table<T> = {
-    rows: T[]
-    count: number
 }

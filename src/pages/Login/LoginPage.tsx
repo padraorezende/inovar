@@ -1,9 +1,9 @@
-import { faEnvelope, faEye, faEyeSlash, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Dialog, DialogContent } from "@mui/material";
 import { useFormik } from "formik";
 import logoImg from "../../assets/logo.png";
 import { DataLogin } from "../../types/Login";
-import { Dialog, DialogContent } from "@mui/material";
 
 export type LoginProps = {
     dataLogin: Partial<DataLogin>
@@ -28,19 +28,21 @@ export const LoginPage = (props: LoginProps) => {
     });
 
     return (
-        <div className="flex flex-col md:flex-row h-screen px-20 py-28">
-            <div className="flex items-center justify-center md:w-1/2">
+        <div className="flex flex-col md:flex-row h-screen md:px-20 md:py-28">
+            <div className="md:flex items-center justify-center md:w-1/2 px-6 hidden">
                 <img src={logoImg} alt="logo" className="w-[500px]" />
             </div>
 
-            <div className="bg-[#ebebeb] flex items-center justify-center md:w-1/2">
+            <div className="bg-[#ebebeb] flex items-center justify-center w-full h-full md:w-1/2">
                 <div className="w-full max-w-md flex flex-col items-center">
                     <FontAwesomeIcon
                         icon={faUserCircle}
                         color="#f5a957"
                         size="5x"
-                        className="mb-10"
+                        className="mt-6 mb-10"
                     />
+                    <h2 className="text-center font-semibold mt-4 text-[#E95401]">Descomplique a burocracia conosco! </h2>
+                    <h2 className="text-center font-semibold mb-6 text-[#E95401]">Faça login e verifique o status dos seus serviços.</h2>
                     <div className="w-4/5 flex flex-col items-start">
                         <label className="text-[#E95401] text-sm mb-1">Email</label>
                         <input className="mb-4 w-full border border-[#D2D1D1] rounded-md py-2 px-3"

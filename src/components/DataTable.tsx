@@ -1,24 +1,27 @@
-import { faEye, faEyeSlash, faInfoCircle, faPenSquare, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faEye, faEyeSlash, faInfoCircle, faPenSquare, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
+import { MenuItem, Select, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import { useState } from "react";
 import { useTable } from 'react-table';
+import { ColumnsTable } from "../types/Table";
 
 type TableProps = {
-    columns: any;
+    columns: ColumnsTable[];
     data: any;
     actionButtons?: boolean;
-    showActives?: boolean
-    handleChangeActiveFilter?: () => void;
     handleChangeFilterName: (name: string) => void,
     page: number;
-    count?: number;
-    onPageChange: (_: any, _newPage: number) => void;
+    onPageChange: (_newPage: number) => void;
     onShowArrayContent: (array: any[]) => void
     onShowPassword?: () => void
     showPassword?: boolean
     handleEdit?: (id: any) => void
     handleDelete?: (id: any) => void
+    showSelect?: boolean
+    handleChangeSelectedColumn?: (columnSelect: any) => void
+    selectedColumn?: any
+    hasNextPage: boolean
+
 }
 
 export const DataTable = (props: TableProps) => {
@@ -28,20 +31,37 @@ export const DataTable = (props: TableProps) => {
 
     return (
         <div className="mt-8">
-            <div className="p-4 flex justify-between">
-                <TextField
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onBlur={(e) => props.handleChangeFilterName(e.target.value)}
-                    size="small"
-                    variant="outlined"
-                    label="Pesquisar por nome"
-                />
+            <div className="p-4 flex flex-wrap justify-center items-center my-4 space-y-2 md:space-y-0 md:space-x-2">
+                <div className="w-full md:w-1/2">
+                    <TextField
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        onBlur={(e) => props.handleChangeFilterName(e.target.value)}
+                        size="small"
+                        variant="outlined"
+                        label="Pesquisar por nome"
+                        className="w-full h-10"
+                    />
+                </div>
+                {props.showSelect &&
+                    <div className="w-full md:w-1/6">
+                        <Select className="w-full bg-[#FCA548] h-10 text-center"
+                            value={props.selectedColumn}
+                            onChange={(e) => props.handleChangeSelectedColumn && props.handleChangeSelectedColumn(e.target.value)}>
+                            {props.columns.map((column) => {
+                                if (column.accessor !== "id") {
+                                    return (
+                                        <MenuItem key={column.accessor} value={column.accessor}>
+                                            {column.Header}
+                                        </MenuItem>
+                                    );
+                                }
+                                return null;
+                            })}
+                        </Select>
+                    </div>
+                }
             </div>
-            {props.showActives && <div className="mr-4">
-                <span>Ativos</span>
-                <Switch onChange={props.handleChangeActiveFilter} defaultChecked />
-            </div>}
             <TableContainer>
                 <Table {...getTableProps()}>
                     <TableHead>
@@ -112,14 +132,22 @@ export const DataTable = (props: TableProps) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10]}
-                component="div"
-                count={props.count || 0}
-                page={props.page}
-                onPageChange={props.onPageChange}
-                rowsPerPage={10}
-            />
+            <div className="flex justify-end items-end my-2">
+                <button
+                    onClick={() => props.onPageChange(props.page - 1)}
+                    className="bg-[#FCA548] hover:bg-[#ee912d] text-white font-bold py-2 px-4 rounded mr-2 disabled:bg-[#a19999a4]"
+                    disabled={props.page == 0}
+                >
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+                <button
+                        onClick={() => props.onPageChange(props.page + 1)}
+                        className="bg-[#FCA548] hover:bg-[#ee912d] text-white font-bold py-2 px-4 rounded disabled:bg-[#a19999a4]"
+                        disabled={!props.hasNextPage}
+                    >
+                        <FontAwesomeIcon icon={faArrowRight} />
+                    </button>
+            </div>
         </div>
     )
 }

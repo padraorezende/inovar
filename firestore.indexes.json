@@ -13,6 +13,44 @@
           "mode": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "registers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "plate",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "request",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "mode": "ARRAY_CONTAINS"
+        },
+        {
+          "fieldPath": "secondData",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "forecast",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "responsible",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "obesityservation",
+          "mode": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": []
