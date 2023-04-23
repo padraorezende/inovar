@@ -20,19 +20,20 @@ export const DashboardPage = (props: DashboardPageProps) => {
             icon={<FontAwesomeIcon icon={faClipboardList} color="white" className="" />}
             title="Dashboard"
         >
-            <div className="flex justify-center gap-8">
+            <div className="flex flex-col md:flex-row md:justify-center md:gap-8">
 
-                {props.dataGraphRequest && <PieChart data={props.dataGraphRequest} />}
+                <div className="w-full md:w-1/2">
+                    {props.dataGraphRequest && <PieChart data={props.dataGraphRequest} />}
+                </div>
 
-                <div className="w-1 bg-[#d3c9cc]" />
+                <div className="w-1 bg-[#d3c9cc] hidden md:block" />
 
-                {props.dataGraphStatus && <PieChart data={props.dataGraphStatus} />}
+                <div className="w-full md:w-1/2">
+                    {props.dataGraphStatus && <PieChart data={props.dataGraphStatus} />}
+                </div>
 
             </div>
-
         </MainCard>
 
     )
-
-
 }  

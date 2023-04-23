@@ -1,6 +1,6 @@
 
 export type DataLogin = {
-    username: string
+    email: string
     password: string
 }
 

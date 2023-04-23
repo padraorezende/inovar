@@ -14,14 +14,14 @@ export const AccessManagePageContaier = () => {
 
     const columns = [
         { Header: "Id", accessor: "id" },
-        { Header: "User", accessor: "username" },
-        { Header: "Status", accessor: "active" },
+        { Header: "Nome", accessor: "name" },
+        // { Header: "Status", accessor: "active" },
         { Header: "Adiministrador", accessor: "admin" },
         { Header: "Telefone", accessor: "phoneNumber" },
         { Header: "Email", accessor: "email" },
         { Header: "Departamento", accessor: "department" },
         { Header: "Senha", accessor: "password" },
-        { Header: "Permissões", accessor: "permissions" },
+        // { Header: "Permissões", accessor: "permissions" },
     ];
 
     const handleChangePage = useCallback((_: any, newPage: number) => {
@@ -38,7 +38,7 @@ export const AccessManagePageContaier = () => {
             const querySnapshot = await getDocs(
                 query(
                     collection(db, 'users'),
-                    where('username', '==', name),
+                    where('name', '==', name),
                     limit(pageSize)
                 )
             );
@@ -62,7 +62,7 @@ export const AccessManagePageContaier = () => {
             const querySnapshot = await getDocs(
                 query(
                     collection(db, 'users'),
-                    orderBy('username'),
+                    orderBy('name'),
                     startAfter(page * pageSize),
                     limit(pageSize)
                 )

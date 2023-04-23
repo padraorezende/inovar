@@ -15,8 +15,8 @@ export const Dropzone = (props: DropzoneProps) => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: props.onDrop });
 
     return (
-        <div className="flex items-center justify-center">
-            <div {...getRootProps()} className="w-3/4 border-2 border-dashed rounded-md p-4 mx-8 mt-4">
+        <div className="flex flex-wrap items-center justify-center">
+            <div {...getRootProps()} className="w-full md:w-1/2 lg:w-1/3 border-2 border-dashed rounded-md p-4 mx-8 mt-4 min-w-[250px]">
                 <input {...getInputProps()} />
                 {isDragActive ? (
                     <div className="flex flex-col items-center justify-center m-8">
@@ -34,7 +34,7 @@ export const Dropzone = (props: DropzoneProps) => {
                 )}
             </div>
             {props.files.length > 0 && (
-                <div className="w-1/4">
+                <div className="w-full md:w-1/2 lg:w-2/3">
                     <h1></h1>
                     <div className="flex">
                         <Table>

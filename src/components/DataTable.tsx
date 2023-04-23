@@ -1,6 +1,6 @@
 import { faEye, faEyeSlash, faInfoCircle, faPenSquare, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Switch, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
+import { Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import { useState } from "react";
 import { useTable } from 'react-table';
 
@@ -42,76 +42,76 @@ export const DataTable = (props: TableProps) => {
                 <span>Ativos</span>
                 <Switch onChange={props.handleChangeActiveFilter} defaultChecked />
             </div>}
+            <TableContainer>
+                <Table {...getTableProps()}>
+                    <TableHead>
+                        {headerGroups.map((header) => (
+                            <TableRow {...header.getHeaderGroupProps()}>
+                                {header.headers.map((column) => (
+                                    <TableCell align="center"{...column.getHeaderProps()}>
+                                        {column.render('Header')}
+                                    </TableCell>
+                                ))}
+                                {props.actionButtons ? <TableCell>Ações</TableCell> : null}
+                            </TableRow>
+                        ))}
+                    </TableHead>
+                    <TableBody {...getTableBodyProps()}>
+                        {rows.map((row: any) => {
+                            prepareRow(row);
+                            return (
+                                <TableRow {...row.getRowProps()}>
+                                    {row.cells.map((cell: any) => (
+                                        <TableCell align="center" {...cell.getCellProps()} >
+                                            {typeof cell.value === 'boolean' ? (
+                                                <Switch disabled checked={cell.value} />
+                                            ) : cell.column.id === 'password' ? (
+                                                <div className="flex justify-center items-center">
+                                                    {
+                                                        props.showPassword && <p className="mr-2">{cell.render('Cell')}</p>
+                                                    }
+                                                    <FontAwesomeIcon
+                                                        icon={props.showPassword ? faEye : faEyeSlash}
+                                                        color="#3570bd"
+                                                        cursor={"pointer"}
+                                                        size="lg"
+                                                        onClick={() => props.onShowPassword && props.onShowPassword()}
 
-            <Table {...getTableProps()}>
-                <TableHead>
-                    {headerGroups.map((header) => (
-                        <TableRow {...header.getHeaderGroupProps()}>
-                            {header.headers.map((column) => (
-                                <TableCell align="center"{...column.getHeaderProps()}>
-                                    {column.render('Header')}
-                                </TableCell>
-                            ))}
-                            {props.actionButtons ? <TableCell>Ações</TableCell> : null}
-                        </TableRow>
-                    ))}
-                </TableHead>
-                <TableBody {...getTableBodyProps()}>
-                    {rows.map((row: any) => {
-                        prepareRow(row);
-                        return (
-                            <TableRow {...row.getRowProps()}>
-                                {row.cells.map((cell: any) => (
-                                    <TableCell align="center" {...cell.getCellProps()} >
-                                        {typeof cell.value === 'boolean' ? (
-                                            <Switch disabled checked={cell.value} />
-                                        ) : cell.column.id === 'password' ? (
-                                            <div className="flex justify-center items-center">
-                                                {
-                                                    props.showPassword && <p className="mr-2">{cell.render('Cell')}</p>
-                                                }
+                                                    />
+                                                </div>
+                                            ) : Array.isArray(cell.value) ? (
                                                 <FontAwesomeIcon
-                                                    icon={props.showPassword ? faEye : faEyeSlash}
+                                                    icon={faInfoCircle}
                                                     color="#3570bd"
                                                     cursor={"pointer"}
                                                     size="lg"
-                                                    onClick={() => props.onShowPassword && props.onShowPassword()}
-
+                                                    onClick={() => props.onShowArrayContent(cell.value)}
                                                 />
+                                            ) : (
+                                                cell.render('Cell')
+                                            )}
+                                        </TableCell>
+                                    ))}
+
+                                    {props.actionButtons ? (
+                                        <TableCell className="action-buttons">
+                                            <div className="flex flex-row gap-4">
+                                                <FontAwesomeIcon icon={faPenToSquare} color={"#3570bd"} size="lg"
+                                                    cursor={"pointer"}
+                                                    onClick={() => props.handleEdit && props.handleEdit(row.original?.id)} />
+                                                <FontAwesomeIcon icon={faTrash} color={"#ed2f32fe"} size="lg"
+                                                    cursor={"pointer"}
+                                                    onClick={() => props.handleDelete && props?.handleDelete(row.original?.id)} />
                                             </div>
-                                        ) : Array.isArray(cell.value) ? (
-                                            <FontAwesomeIcon
-                                                icon={faInfoCircle}
-                                                color="#3570bd"
-                                                cursor={"pointer"}
-                                                size="lg"
-                                                onClick={() => props.onShowArrayContent(cell.value)}
-                                            />
-                                        ) : (
-                                            cell.render('Cell')
-                                        )}
-                                    </TableCell>
-                                ))}
+                                        </TableCell>
+                                    ) : null}
+                                </TableRow>
 
-                                {props.actionButtons ? (
-                                    <TableCell className="action-buttons">
-                                        <div className="flex flex-row gap-4">
-                                            <FontAwesomeIcon icon={faPenToSquare} color={"#3570bd"} size="lg"
-                                                cursor={"pointer"}
-                                                onClick={() => props.handleEdit && props.handleEdit(row.original?.id)} />
-                                            <FontAwesomeIcon icon={faTrash} color={"#ed2f32fe"} size="lg"
-                                                cursor={"pointer"}
-                                                onClick={() => props.handleDelete && props?.handleDelete(row.original?.id)} />
-                                        </div>
-                                    </TableCell>
-                                ) : null}
-                            </TableRow>
-
-                        );
-                    })}
-                </TableBody>
-
-            </Table>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[10]}
                 component="div"

@@ -8,6 +8,5 @@ export type DataNewUser = {
     password: string
     phoneNumber: string
     active: boolean
-    username: string
     permissions: string[]
 }
