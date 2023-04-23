@@ -1,0 +1,44 @@
+[debug] [2023-04-23T19:29:58.176Z] ----------------------------------------------------------------------
+[debug] [2023-04-23T19:29:58.179Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\MicroUniverso\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2023-04-23T19:29:58.179Z] CLI Version:   11.28.0
+[debug] [2023-04-23T19:29:58.179Z] Platform:      win32
+[debug] [2023-04-23T19:29:58.180Z] Node Version:  v18.15.0
+[debug] [2023-04-23T19:29:58.181Z] Time:          Sun Apr 23 2023 16:29:58 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-04-23T19:29:58.181Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-04-23T19:29:58.252Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-04-23T19:29:58.252Z] > authorizing via signed-in user (padraorz@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\MicroUniverso\Desktop\inovar\app
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-04-23T19:29:59.836Z] Using project from CLI flag: inovar-renovar
+[debug] [2023-04-23T19:29:59.841Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/inovar-renovar [none]
+[debug] [2023-04-23T19:30:00.339Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/inovar-renovar 200
+[debug] [2023-04-23T19:30:00.339Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/inovar-renovar {"projectId":"inovar-renovar","projectNumber":"14777500564","displayName":"inovar-renovar","name":"projects/inovar-renovar","resources":{"hostingSite":"inovar-renovar"},"state":"ACTIVE","etag":"1_0402970e-93d1-4f69-9c62-dca3fd637e52"}
+[info] i  Using project inovar-renovar (inovar-renovar) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
