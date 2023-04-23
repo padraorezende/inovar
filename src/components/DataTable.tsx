@@ -36,7 +36,7 @@ export const DataTable = (props: TableProps) => {
                     <TextField
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
-                        onBlur={(e) => props.handleChangeFilterName(e.target.value)}
+                        onBlur={(e) => props.handleChangeFilterName(e.target.value.trim().toUpperCase())}
                         size="small"
                         variant="outlined"
                         label="Pesquisar por nome"
